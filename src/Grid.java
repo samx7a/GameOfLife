@@ -25,6 +25,13 @@ public class Grid {
 		this.minY = 1;
 		this.maxY = 3;
 	}
+	private boolean containsPoint(Point point) {
+		for(Point p:grid) {
+			if((p.getX() == point.getX()) && (p.getY() == point.getY()))
+				return true;
+		}
+		return false;
+	}
 	private boolean containsPoint(int x,int y) {
 		for(Point p:grid) {
 			if((p.getX() == x) && (p.getY() == y))
@@ -33,7 +40,23 @@ public class Grid {
 		return false;
 	}
 	/**
-	 * A method to generate the 8 adjacent spaces for a given cell
+	 * A method to return all living neighbouring cells for a given cell
+	 * @param cell The cell to have its neighbours explored.
+	 * @return Returns an arraylist of living cells.
+	 */
+	private ArrayList<Point> generateNeighbours(Point cell){
+		ArrayList<Point> adjacentSpaces = generateAdjacentSpaces(cell);
+		ArrayList<Point> neighbours 	= new ArrayList<Point>();
+		for(Point space: adjacentSpaces) {
+			if(this.containsPoint(space))
+				neighbours.add(space);
+			else
+				continue;
+		}
+		return neighbours;
+	}
+	/**
+	 * A helper method to generate the 8 adjacent spaces for a given cell
 	 * @param cell The living cell to calculate neighbours from
 	 * @return We return an ArrayList of Points, of size 8 containing all
 	 * potential neighbours for the provided cells.
@@ -56,7 +79,6 @@ public class Grid {
 		neighbours.add(new Point(x - 1, y - 1));
 		return neighbours;
 	}
-	
 	public void renderGrid() {
 		String renderFormat = "%s|";
 		// Render grid with 1 buffer column and 1 buffer row.
@@ -71,7 +93,6 @@ public class Grid {
 			System.out.print("\n");
 		}
 	}
-	
 	public static void main(String[] args) {
 		Grid grid = new Grid();
 		grid.renderGrid();
