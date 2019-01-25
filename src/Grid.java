@@ -39,7 +39,7 @@ public class Grid {
 	 * potential neighbours for the provided cells.
 	 * (Horizontals, Verticals and Diagonals).
 	 */
-	private ArrayList<Point> generateNeighbours(Point cell){
+	private ArrayList<Point> generateAdjacentSpaces(Point cell){
 		int x = cell.getX();
 		int y = cell.getY();
 		ArrayList<Point> neighbours = new ArrayList<Point>();
@@ -56,6 +56,7 @@ public class Grid {
 		neighbours.add(new Point(x - 1, y - 1));
 		return neighbours;
 	}
+	
 	public void renderGrid() {
 		String renderFormat = "%s|";
 		// Render grid with 1 buffer column and 1 buffer row.
