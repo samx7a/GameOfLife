@@ -35,12 +35,12 @@ public class Grid {
 	public void renderGrid() {
 		String renderFormat = "%s|";
 		// Render grid with 1 buffer column and 1 buffer row.
-		for(int x = 0; x <= maxX + 1; x++) {
-			for(int y = 0; y<= maxY + 1; y++) {
+		for(int x = minX - 1 ; x <= maxX + 1; x++) {
+			for(int y = minY - 1; y<= maxY + 1; y++) {
 				System.out.printf(renderFormat, containsPoint(x,y) ? "•" : " ");
 			}
 			System.out.print("\n");
-			for(int y2 = 0; y2<= maxY + 1; y2++) {
+			for(int y2 = minY - 1; y2<= maxY + 1; y2++) {
 				System.out.print("-+");
 			}
 			System.out.print("\n");
