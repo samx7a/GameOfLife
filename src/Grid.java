@@ -32,6 +32,30 @@ public class Grid {
 		}
 		return false;
 	}
+	/**
+	 * A method to generate the 8 adjacent spaces for a given cell
+	 * @param cell The living cell to calculate neighbours from
+	 * @return We return an ArrayList of Points, of size 8 containing all
+	 * potential neighbours for the provided cells.
+	 * (Horizontals, Verticals and Diagonals).
+	 */
+	private ArrayList<Point> generateNeighbours(Point cell){
+		int x = cell.getX();
+		int y = cell.getY();
+		ArrayList<Point> neighbours = new ArrayList<Point>();
+		// Horizontals
+		neighbours.add(new Point(x, y + 1));
+		neighbours.add(new Point(x, y - 1));
+		// Verticals
+		neighbours.add(new Point(x + 1, y));
+		neighbours.add(new Point(x - 1, y));
+		// Diagonals
+		neighbours.add(new Point(x + 1, y + 1));
+		neighbours.add(new Point(x - 1, y + 1));
+		neighbours.add(new Point(x + 1, y - 1 ));
+		neighbours.add(new Point(x - 1, y - 1));
+		return neighbours;
+	}
 	public void renderGrid() {
 		String renderFormat = "%s|";
 		// Render grid with 1 buffer column and 1 buffer row.
