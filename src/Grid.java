@@ -12,13 +12,17 @@ public class Grid {
 	// Update these values as we populate the grid list. They are used for rendering purposes.
 	private int maxY = 0;
 	private int maxX = 0;
+	private int minY = 0;
+	private int minX = 0;
 	public Grid() {
 		// Instantiate grid with default set of points.
 		this.grid = new ArrayList<Point>();
 		grid.add(new Point(1,1));
 		grid.add(new Point(1,2));
 		grid.add(new Point(1,3));
+		this.minX = 1;
 		this.maxX = 1;
+		this.minY = 1;
 		this.maxY = 3;
 	}
 	private boolean containsPoint(int x,int y) {
