@@ -16,10 +16,10 @@ public class Grid {
 		// Instantiate grid with default set of points.
 		this.grid = new ArrayList<Point>();
 		grid.add(new Point(1,1));
-		grid.add(new Point(2,1));
-		grid.add(new Point(3,1));
-		this.maxX = 3;
-		this.maxY = 1;
+		grid.add(new Point(1,2));
+		grid.add(new Point(1,3));
+		this.maxX = 1;
+		this.maxY = 3;
 	}
 	private boolean containsPoint(int x,int y) {
 		for(Point p:grid) {
@@ -29,16 +29,22 @@ public class Grid {
 		return false;
 	}
 	public void renderGrid() {
+		String renderFormat = "%s|";
 		// Render grid with 1 buffer column and 1 buffer row.
 		for(int x = 0; x <= maxX + 1; x++) {
-			
 			for(int y = 0; y<= maxY + 1; y++) {
-				
+				System.out.printf(renderFormat, containsPoint(x,y) ? "•" : " ");
 			}
+			System.out.print("\n");
+			for(int y2 = 0; y2<= maxY + 1; y2++) {
+				System.out.print("-+");
+			}
+			System.out.print("\n");
 		}
 	}
 	
 	public static void main(String[] args) {
 		Grid grid = new Grid();
+		grid.renderGrid();
 	}
 }
