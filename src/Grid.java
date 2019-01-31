@@ -35,6 +35,22 @@ public class Grid {
 		return false;
 	}
 	/**
+	 * 
+	 * @param grid A list of cells
+	 * @param point A point to check if exists in the list of cells
+	 * @return true if point is a live cell in the supplied grid.
+	 * This function signature is used when we want to check existence
+	 * of a point in a grid that is not the current state, as stored in 
+	 * this.grid
+	 */
+	private boolean containsPoint(ArrayList<Point> grid, Point point) {
+		for(Point p:grid) {
+			if((p.getX() == point.getX()) && (p.getY() == point.getY()))
+				return true;
+		}
+		return false;
+	}
+	/**
 	 * A method to return all living neighbouring cells for a given cell
 	 * @param cell The cell to have its neighbours explored.
 	 * @return Returns a list of living cells.
@@ -152,7 +168,7 @@ public class Grid {
 		     while(adjacentSpacesIterator.hasNext()){
 		    	 Point space = adjacentSpacesIterator.next();
 		    	 // Check whether the generated space is already live cell.
-		    	 if(this.containsPoint(space)) 
+		    	 if(this.containsPoint(space)||this.containsPoint(nextGrid,space)) 
 		    		 continue;
 		    	 int neighbourCountOfSpace = getNeighbours(space).size();
 		    	 // If it has three live neighbours then create a new cell here.
@@ -164,7 +180,6 @@ public class Grid {
 	}
 	public static void main(String[] args) throws IOException {
 		Grid grid = new Grid();
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int iterateCount = 0;
 		grid.renderGrid();
 		System.out.println("Press key to iterate\n");
