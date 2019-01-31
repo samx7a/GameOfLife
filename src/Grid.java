@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 /**
@@ -159,10 +162,18 @@ public class Grid {
 		}
 		this.grid = nextGrid;
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Grid grid = new Grid();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int iterateCount = 0;
 		grid.renderGrid();
-		grid.iterate();
-		grid.renderGrid();
+		System.out.println("Press key to iterate\n");
+		while(true) {
+			System.in.read();
+			iterateCount++;
+			System.out.printf("Number of iterations %d. Press key to iterate.\n", iterateCount);
+			grid.iterate();
+			grid.renderGrid();
+		}
 	}
 }
