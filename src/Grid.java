@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 /**
  * 
  * @author sam
@@ -42,18 +43,20 @@ public class Grid {
 	/**
 	 * A method to return all living neighbouring cells for a given cell
 	 * @param cell The cell to have its neighbours explored.
-	 * @return Returns an arraylist of living cells.
+	 * @return Returns a list of living cells.
 	 */
-	private ArrayList<Point> generateNeighbours(Point cell){
+	private ArrayList<Point> getNeighbours(Point cell){
 		ArrayList<Point> adjacentSpaces = generateAdjacentSpaces(cell);
-		ArrayList<Point> neighbours 	= new ArrayList<Point>();
-		for(Point space: adjacentSpaces) {
-			if(this.containsPoint(space))
-				neighbours.add(space);
-			else
-				continue;
+		Iterator<Point> iter = adjacentSpaces.iterator();
+		while (iter.hasNext()) {
+		    Point space = iter.next();
+		    // If the adjacent space is occupied by a living cell in our grid.
+		    if(this.containsPoint(space))
+		    	continue;
+	    	else 
+		    	iter.remove();	
 		}
-		return neighbours;
+		return adjacentSpaces;
 	}
 	/**
 	 * A helper method to generate the 8 adjacent spaces for a given cell
