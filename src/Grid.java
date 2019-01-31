@@ -83,6 +83,7 @@ public class Grid {
 		return neighbours;
 	}
 	public void renderGrid() {
+		// TODO Adjust max,min x,y values either at grid edit or grid render.
 		String renderFormat = "%s|";
 		// Render grid with 1 buffer column and 1 buffer row.
 		for(int x = minX - 1 ; x <= maxX + 1; x++) {
@@ -95,6 +96,7 @@ public class Grid {
 			}
 			System.out.print("\n");
 		}
+		System.out.print("\n");
 	}
 	/**
 	 * A procedure to iterate the state of the grid
@@ -106,20 +108,28 @@ public class Grid {
 		// No living cells: As you were
 		if(this.grid.size() == 0)
 			return;
-		// Underpopulation: When a live cell has fewer than two living neighbours
-		// Its brown bread.
+		
 		Iterator<Point> iter = this.grid.iterator();
 
 		while (iter.hasNext()) {
 		    Point cell = iter.next();
 		    int neighbourCount = getNeighbours(cell).size();
-		    if (neighbourCount >= 2)
+		    /**
+		     *  Underpopulation: When a live cell has fewer than two living neighbours
+		     *  it dies.
+		     *  Overpopulation: When a live cell has more than three neighbours
+		     *  it dies.
+		     *  Survival: When a live cell has two or three neighbours, it survives.
+		     */
+		     if ((neighbourCount == 2)||(neighbourCount == 3) )
 		    	nextGrid.add(cell);
 		}
 		this.grid = nextGrid;
 	}
 	public static void main(String[] args) {
 		Grid grid = new Grid();
+		grid.renderGrid();
+		grid.iterate();
 		grid.renderGrid();
 	}
 }
