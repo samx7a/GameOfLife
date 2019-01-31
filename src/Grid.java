@@ -96,6 +96,28 @@ public class Grid {
 			System.out.print("\n");
 		}
 	}
+	/**
+	 * A procedure to iterate the state of the grid
+	 * Determines future states of cells by applying scenario cases in sequence
+	 */
+	private void iterate() {
+		// List of cells present for next state of iteration.
+		ArrayList<Point> nextGrid = new ArrayList<Point>();
+		// No living cells: As you were
+		if(this.grid.size() == 0)
+			return;
+		// Underpopulation: When a live cell has fewer than two living neighbours
+		// Its brown bread.
+		Iterator<Point> iter = this.grid.iterator();
+
+		while (iter.hasNext()) {
+		    Point cell = iter.next();
+		    int neighbourCount = getNeighbours(cell).size();
+		    if (neighbourCount >= 2)
+		    	nextGrid.add(cell);
+		}
+		this.grid = nextGrid;
+	}
 	public static void main(String[] args) {
 		Grid grid = new Grid();
 		grid.renderGrid();
