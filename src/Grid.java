@@ -4,7 +4,7 @@ import java.util.Iterator;
  * 
  * @author sam
  *  Main class for GameOfLife, creates a loop which listens for input to iterate the game.
- *  Starts with an automatically pre-poulated list of live cells.
+ *  Starts with an automatically pre-populated list of live cells.
  */
 public class Grid {
 	// Note the origin of the grid (0,0) corresponds to the top left corner.
@@ -123,6 +123,27 @@ public class Grid {
 		     */
 		     if ((neighbourCount == 2)||(neighbourCount == 3) )
 		    	nextGrid.add(cell);
+		     /** 
+		      * Creation of life: When a given empty position has exactly three
+		      * neighbouring cells, a cell is created in that position.
+		      * 
+		      * While we are iterating through all the live cells in the current grid:
+		      * Check the adjacent spaces of each current cell.
+		      * Check whether the given adjacent space has 3 neighbours.
+		      * If it does then create a live cell from the empty location point.
+		      */
+		     ArrayList<Point> adjacentSpaces = this.generateAdjacentSpaces(cell);
+		     Iterator<Point> adjacentSpacesIterator = adjacentSpaces.iterator();
+		     while(adjacentSpacesIterator.hasNext()){
+		    	 Point space = adjacentSpacesIterator.next();
+		    	 // Check whether the generated space is already live cell.
+		    	 if(this.containsPoint(space)) 
+		    		 continue;
+		    	 int neighbourCountOfSpace = getNeighbours(space).size();
+		    	 // If it has three live neighbours then create a new cell here.
+		    	 if(neighbourCountOfSpace == 3)
+		    		 nextGrid.add(space);
+		     }
 		}
 		this.grid = nextGrid;
 	}
