@@ -181,14 +181,17 @@ public class Grid {
 	}
 	
 	public void populateGridFromFile(String filename) throws FileNotFoundException {
+		this.grid = new ArrayList<Point>();
 		Scanner fileInput = new Scanner(new File(filename));
 		// Split tokens on newline and commas
 		fileInput.useDelimiter("\\n|,");
 		while (fileInput.hasNextInt()){
 			int x = fileInput.nextInt();
 			int y = fileInput.nextInt();
+			this.grid.add(new Point(x,y));
 			System.out.printf("SH: %d,%d\n", x,y);
 		}
+		fileInput.close();
 	}
 	/**
 	 * 
