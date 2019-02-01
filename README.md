@@ -5,9 +5,12 @@ From this directory run:
     javac -d . src/*
 
 To run:
-A user can either supply one or zero command line arguments. A filename can be supplied which will be used to populate the starting cell grid. The textfile should have this format, where cells are line separated and x,y are comma separated.
+A user can either supply one or zero command line arguments. A filename can be supplied which will be used to populate the starting cell grid. The textfile should be formatted so that cells are line separated and x,y are comma separated.
+
 x,y
+
 x,y
+
 
 
 
