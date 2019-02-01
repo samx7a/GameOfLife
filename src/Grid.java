@@ -1,8 +1,9 @@
-import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 /**
  * 
  * @author sam
@@ -178,13 +179,51 @@ public class Grid {
 		}
 		this.grid = nextGrid;
 	}
-	public static void main(String[] args) throws IOException {
+	
+	public void populateGridFromFile(String filename) throws FileNotFoundException {
+		Scanner fileInput = new Scanner(new File(filename));
+		// Split tokens on newline and commas
+		fileInput.useDelimiter("\\n|,");
+		while (fileInput.hasNextInt()){
+			int x = fileInput.nextInt();
+			int y = fileInput.nextInt();
+			System.out.printf("SH: %d,%d\n", x,y);
+		}
+	}
+	/**
+	 * 
+	 * @param args May contain one or zero arguments
+	 * arg[0] is a filename to read a grid start state from
+	 * The format of the file is:
+	 * x,y
+	 * x,y
+	 * With comma separating x and y values, and a line separating each cell.
+	 * @throws IOException
+	 */
+	public static void main(String[] args){
 		Grid grid = new Grid();
+		// Check for supplied filename containing grid description.
+		if (args.length == 1) {
+			try {
+				grid.populateGridFromFile(args[0]);
+			} catch (FileNotFoundException e) {
+				System.out.printf("File %s not found\n", args[0]);
+				e.printStackTrace();
+				return;
+			}
+		}
+		
 		int iterateCount = 0;
 		grid.renderGrid();
-		System.out.println("Press key to iterate\n");
+		System.out.println("Press return to iterate\n");
 		while(true) {
-			System.in.read();
+			try {
+				System.in.read();
+			} catch (IOException e) {
+				System.out.println("No attached console to read from\n");
+				e.printStackTrace();
+				return;
+			}
 			iterateCount++;
 			System.out.printf("Number of iterations %d. Press key to iterate.\n", iterateCount);
 			grid.iterate();
