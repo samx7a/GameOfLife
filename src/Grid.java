@@ -201,7 +201,6 @@ public class Grid {
 	 * x,y
 	 * x,y
 	 * With comma separating x and y values, and a line separating each cell.
-	 * @throws IOException
 	 */
 	public static void main(String[] args){
 		Grid grid = new Grid();
