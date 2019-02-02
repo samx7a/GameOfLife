@@ -6,14 +6,12 @@ From this directory run:
 
 To run:
 A user can either supply one or zero command line arguments. A filename can be supplied which will be used to populate the starting cell grid. The textfile should be formatted so that cells are line separated and x,y are comma separated.
-
+<p>
+x,y<br>
 x,y
-
-x,y
-
-
-
-
+</p>    
+    
+    
     java Grid
 
 -- or --
