@@ -120,7 +120,7 @@ public class Grid {
 		// Render grid with 1 buffer column and 1 buffer row.
 		for(int x = minX - 1 ; x <= maxX + 1; x++) {
 			for(int y = minY - 1; y<= maxY + 1; y++) {
-				System.out.printf(renderFormat, containsPoint(x,y) ? "•" : " ");
+				System.out.printf(renderFormat, containsPoint(x,y) ? "\u2022" : " ");
 			}
 			System.out.print("\n");
 			for(int y2 = minY - 1; y2<= maxY + 1; y2++) {
