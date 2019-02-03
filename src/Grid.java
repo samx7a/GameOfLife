@@ -183,13 +183,13 @@ public class Grid {
 	public void populateGridFromFile(String filename) throws FileNotFoundException {
 		this.grid = new ArrayList<Point>();
 		Scanner fileInput = new Scanner(new File(filename));
-		// Split tokens on newline and commas
-		fileInput.useDelimiter("\\n|,");
-		while (fileInput.hasNextInt()){
-			int x = fileInput.nextInt();
-			int y = fileInput.nextInt();
+		fileInput.useDelimiter("\\n");
+		while (fileInput.hasNextLine()){
+			String line = fileInput.nextLine();
+			String[] coordinates = line.split(",");
+			int x = Integer.parseInt(coordinates[0]);
+			int y = Integer.parseInt(coordinates[1]);
 			this.grid.add(new Point(x,y));
-			System.out.printf("SH: %d,%d\n", x,y);
 		}
 		fileInput.close();
 	}
@@ -227,9 +227,10 @@ public class Grid {
 				return;
 			}
 			iterateCount++;
-			System.out.printf("Number of iterations %d. Press key to iterate.\n", iterateCount);
+			System.out.printf("Number of iterations %d\n", iterateCount);
 			grid.iterate();
 			grid.renderGrid();
+			System.out.println("Press return to iterate\n");
 		}
 	}
 }
